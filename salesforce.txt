@@ -1,0 +1,48 @@
+SalesForce insert update delete
+
+Insert:
+public class first {
+    public void CreateAccount(String Name, String Phone) {
+        account acc = new account();
+        acc.Name = Name;
+        acc.Phone = Phone;
+        insert acc;
+        System.debug('Account has been Inserted: ' + acc.name);
+    }
+}
+Debug:
+First acc=new first();
+Acc.CreateAccount(‘Abhijeet’, ‘1234567898’);
+
+Update:
+public class second {
+    public void UpdateOlderAccount(String Name){
+        List<Account> oldAccounts = new List<Account>();
+        for(Account acc: [SELECT Name from Account WHERE Phone='8798345676']) {
+            acc.Name = Name;
+            oldAccounts.add(acc);
+            System.debug('Account has been updated' + acc.name);
+        }
+        update oldAccounts;
+    }
+}
+
+Debug: 
+Second acc = new second();
+Acc.UpdateOlderAccount(‘Radhika’);
+
+Delete:
+public class third {
+    public void DeleteAccount(){
+        List<Account> oldAccounts = new List<Account>();
+        for(Account acc:[SELECT Name, Phone from Account WHERE Name='Radhika']){
+            delete acc;
+            System.debug('Account deleted: '+acc.name);
+        }
+        update oldAccounts;
+    }
+}
+
+Debug:
+third acc=new third();
+acc.DeleteAccount();
